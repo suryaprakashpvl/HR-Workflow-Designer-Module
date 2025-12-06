@@ -1,73 +1,165 @@
-# React + TypeScript + Vite
+# 🌟 HR Workflow Builder
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A **modular, scalable Workflow Automation Builder** built using **React,
+Vite, TypeScript, and React Flow**.\
+This tool enables HR teams to visually design workflows for
+**onboarding, approvals, document processing**, and other internal
+automations.
 
-Currently, two official plugins are available:
+It demonstrates strong skills in:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+-   ⚛️ Front-end architecture\
+-   🔄 Graph state management\
+-   🧪 API-driven simulation\
+-   🧩 Custom node design\
+-   📐 Scalable component structuring
 
-## React Compiler
+------------------------------------------------------------------------
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 🏗️ Architecture
 
-## Expanding the ESLint configuration
+The project follows a **feature-based architecture**, optimized for
+scalability, clarity, and maintainability.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+    src/
+    │
+    ├── api/
+    │   └── mockActions.ts              # GET /automations & POST /simulate mocks
+    │
+    ├── components/
+    │   ├── Canvas/
+    │   │   ├── WorkflowCanvas.tsx      # Main workflow canvas (React Flow)
+    │   │   ├── NodeFormPanel.tsx       # Dynamic node configuration panel
+    │   │── nodes/                  # All workflow node types
+    │       ├── StartNode.tsx
+    │       ├── TaskNode.tsx
+    │       ├── ApprovalNode.tsx
+    │       ├── AutomatedNode.tsx
+    │       ├── EndNode.tsx
+    │       └── index.ts                # Node mapping for React Flow
+    │
+    │   ├── sandbox/
+    │   │   └── WorkflowSandbox.tsx     # Workflow simulation/testing module
+    │
+    │   └── sidebar/
+    │       └── Sidebar.tsx             # Optional sidebar UI
+    │
+    ├── context/
+    │   └── WorkflowContext.tsx         # Central workflow graph state manager
+    │
+    ├── types/
+    │   └── workflow.ts                 # Strong TypeScript types for workflows
+    │
+    ├── utils/
+    │   ├── download.ts                 # Export workflow JSON
+    │   └── validateWorkflowGraph.ts    # Workflow validation utilities
+    │
+    ├── App.tsx
+    └── main.tsx
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+------------------------------------------------------------------------
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## 🎯 Key Architectural Decisions
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+### ✔ Feature-Based Structure
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Keeps related components, logic, types, and utilities grouped together.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### ✔ WorkflowContext Instead of Redux
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+Simpler, scalable, and integrates smoothly with React Flow.
+
+### ✔ React Flow for Canvas
+
+Industry-standard library for visual workflow editors.
+
+### ✔ Mock API Layer
+
+Provides realistic API interactions without needing a backend.
+
+### ✔ Dedicated Simulation Sandbox
+
+Isolated module for workflow testing.
+
+------------------------------------------------------------------------
+
+## 🚀 How to Run the Project
+
+### 1. Install dependencies
+
+    npm install
+
+### 2. Start the development server
+
+    npm run dev
+
+### 3. Open the project in browser
+
+    http://localhost:5173
+
+No backend required --- everything runs through mockActions.ts.
+
+------------------------------------------------------------------------
+
+## ✔️ What's Completed
+
+### 🖼️ Workflow Designer
+
+-   Drag & drop nodes\
+-   Edge connections\
+-   Custom node visuals\
+-   MiniMap, zoom, panning
+
+### 📝 Node Editing Panel
+
+-   Title\
+-   Description\
+-   Assignee / Approver\
+-   Due date\
+-   Metadata\
+-   Automation parameters
+
+### 🧪 Mock API Layer
+
+-   GET /automations\
+-   POST /simulate
+
+### 🧰 Simulation Sandbox
+
+-   Validation\
+-   Execution logs
+
+### 📦 Utilities + Types
+
+-   Workflow validation\
+-   Workflow JSON export
+
+------------------------------------------------------------------------
+
+## 🚧 What I Would Add With More Time
+
+### 🔍 Advanced Graph Validation
+
+Cycle detection, unreachable nodes, missing Start/End.
+
+### 🕒 Visual Timeline Simulation
+
+Animated node execution.
+
+### 💾 Autosave + Versioning
+
+Version history and rollback.
+
+### 📁 Import/Export Workflows
+
+Template sharing.
+
+### 🎨 UI Enhancements
+
+Better icons, animations, spacing.
+
+### 🌐 Real Backend Integration
+
+DB storage, auth, real workflow execution.
+
+------------------------------------------------------------------------
