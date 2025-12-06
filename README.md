@@ -1,265 +1,73 @@
-🌟 HR Workflow Builder – README
-
-A modular, scalable Workflow Automation Builder built with React, Vite, TypeScript, and React Flow.
-This prototype enables HR teams to visually design workflows for onboarding, approvals, document processing, and more.
-
-It demonstrates advanced front-end engineering across:
-
-⚙️ Scalable architecture
-
-🔄 Workflow graph state management
-
-🧩 Reusable custom node components
-
-🧪 Workflow simulation engine
-
-🧪 Mock API integration
-
-🏗️ Architecture
-
-The system is organized using a feature-based architecture to maximize scalability and maintainability.
-
-🔑 Key Architectural Principles
-1. Feature-Based Structure (Not Atomic Folders)
-
-Each feature contains its UI, hooks, types, mocks, and utilities — keeping everything modular.
-
-2. Centralized WorkflowContext
-
-A dedicated context manages:
-
-nodes
-
-edges
-
-selection
-
-canvas events
-
-updates & mutations
-
-This avoids Redux boilerplate while remaining scalable.
-
-3. React Flow for Canvas Rendering
-
-Chosen for its production-grade features:
-
-Node/edge rendering
-
-Drag & drop
-
-Zoom & pan
-
-Custom node components
-
-High performance for large graphs
-
-4. Strong TypeScript Models
-
-Each node type includes strict interfaces:
-
-StartNodeData
-
-TaskNodeData
-
-ApprovalNodeData
-
-AutomatedNodeData
-
-EndNodeData
-
-Ensures safe updates and prevents invalid workflow structures.
-
-5. Mock API Layer (Realistic Simulation)
-
-A lightweight mock backend simulates:
-
-/automations — fetches available automated actions
-
-/simulate — returns step-by-step execution logs
-
-No backend needed.
-
-6. Dedicated Workflow Simulation Sandbox
-
-Completely isolated from the canvas, this module:
-
-Serializes the workflow
-
-Validates structure
-
-Runs mock execution
-
-Displays timeline/logs
-
-Keeps design and simulation logic cleanly separated.
-
-🚀 Getting Started
-1. Install Dependencies
-npm install
-
-2. Start Development Server
-npm run dev
-
-3. Open App in Browser
-http://localhost:5173
-
-
-No backend required — everything runs via mock API functions.
-
-🎨 Design Decisions
-✨ React Flow for Workflow Canvas
-
-Avoids reinventing graph rendering. React Flow provides battle-tested features for:
-
-Node layout
-
-Connection logic
-
-Custom components
-
-Mini-map / controls
-
-✨ Context Instead of Redux
-
-Used because:
-
-Workflow state is local to this feature
-
-Low boilerplate
-
-Perfect integration with ReactFlow hooks
-
-✨ TypeScript for Node Structures
-
-Strict typing offers:
-
-Predictable form updates
-
-Safer configuration
-
-Fewer runtime bugs
-
-✨ Mock API Instead of Real Backend
-
-Allows rapid prototyping with realistic behavior:
-
-Automation listing
-
-Workflow execution simulation
-
-✨ Dedicated Simulation Sandbox
-
-Prevents mixing workflow editing and execution logic.
-
-✔️ Completed Features
-🖼️ Workflow Designer (Core Module)
-
-Drag & drop nodes
-
-Connect / delete edges
-
-Zoom, pan, minimap
-
-Custom visuals for every node type
-
-Persist node positions
-
-Dynamic toolbar actions
-
-📝 Node Editing Panel
-
-Dynamic, type-specific configuration forms:
-
-Title
-
-Description
-
-Metadata fields
-
-Assignee / Approver
-
-Due dates
-
-Automation settings
-
-💻 Mock API Layer
-
-GET /automations returns email/docgen/etc. mock actions
-
-POST /simulate returns workflow execution logs
-
-🧪 Workflow Simulation Sandbox
-
-Full workflow serialization
-
-Validation steps
-
-Simulation log output
-
-Visual result panel
-
-📦 Utilities
-
-Graph validation
-
-Workflow JSON exporter
-
-Reusable node helpers
-
-Custom React Flow hooks
-
-🚧 Future Enhancements (With More Time)
-1. Advanced Graph Validator
-
-Cycle detection
-
-Orphan node detection
-
-Missing Start/End validation
-
-Support for branching & parallel flows
-
-2. Visual Execution Timeline
-
-Animated step-by-step node highlighting
-
-State transitions (completed, failed, skipped)
-
-Execution speed control
-
-3. Autosave + Versioning
-
-Local storage autosave
-
-Version history
-
-Rollback feature
-
-4. Import / Export Workflows
-
-Upload workflow JSON
-
-Share workflow templates
-
-Versioned workflow bundles
-
-5. UI Enhancements
-
-Better color palette
-
-Node icons
-
-Hover animations
-
-Improved layout & spacing
-
-6. Real Backend Integration
-
-User authentication
-
-Workflow library storage
-
-Execution engine on server
-
-Activity log database
+# React + TypeScript + Vite
+
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+
+Currently, two official plugins are available:
+
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+
+## React Compiler
+
+The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+
+## Expanding the ESLint configuration
+
+If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+
+```js
+export default defineConfig([
+  globalIgnores(['dist']),
+  {
+    files: ['**/*.{ts,tsx}'],
+    extends: [
+      // Other configs...
+
+      // Remove tseslint.configs.recommended and replace with this
+      tseslint.configs.recommendedTypeChecked,
+      // Alternatively, use this for stricter rules
+      tseslint.configs.strictTypeChecked,
+      // Optionally, add this for stylistic rules
+      tseslint.configs.stylisticTypeChecked,
+
+      // Other configs...
+    ],
+    languageOptions: {
+      parserOptions: {
+        project: ['./tsconfig.node.json', './tsconfig.app.json'],
+        tsconfigRootDir: import.meta.dirname,
+      },
+      // other options...
+    },
+  },
+])
+```
+
+You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+
+```js
+// eslint.config.js
+import reactX from 'eslint-plugin-react-x'
+import reactDom from 'eslint-plugin-react-dom'
+
+export default defineConfig([
+  globalIgnores(['dist']),
+  {
+    files: ['**/*.{ts,tsx}'],
+    extends: [
+      // Other configs...
+      // Enable lint rules for React
+      reactX.configs['recommended-typescript'],
+      // Enable lint rules for React DOM
+      reactDom.configs.recommended,
+    ],
+    languageOptions: {
+      parserOptions: {
+        project: ['./tsconfig.node.json', './tsconfig.app.json'],
+        tsconfigRootDir: import.meta.dirname,
+      },
+      // other options...
+    },
+  },
+])
+```
